@@ -31,12 +31,16 @@ public class Game {
 				playerPos = scan.nextInt();
 			}
 			placePiece(gameBoard, playerPos, "player");
+			String result = checkWin();
+			if(result.length()>0) {
+				System.out.println(result);
+				break;
+			}
 			
 			//generating cpu response using random
 			Random rand = new Random();
 			int cpuPos = rand.nextInt(9) + 1;
 			while(playerPositions.contains(cpuPos) || cpuPositions.contains(cpuPos)) {
-				System.out.println("Thinking");
 				cpuPos = rand.nextInt(9) + 1;
 			}
 			placePiece(gameBoard, cpuPos, "cpu");
@@ -44,8 +48,11 @@ public class Game {
 			//printing board
 			printGameBoard(gameBoard);
 			
-			String result = checkWin();
-			System.out.println(result);
+			result = checkWin();
+			if(result.length()>0) {
+				System.out.println(result);
+				break;
+			}
 		}
 		
 	}
